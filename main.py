@@ -207,19 +207,24 @@ with tab1:
   }
 
   preview_df = pd.DataFrame(data, index=['input'])
-
-  st.header("User Input as DataFrame")
-  st.write("")
-  st.dataframe(preview_df.iloc[:, :6])
-  st.write("")
-  st.dataframe(preview_df.iloc[:, 6:])
-  st.write("")
-
   result = ":violet[-]"
 
-  predict_btn = st.button("**Predict**", type="primary")
+  col1, col2 = st.columns([1, 1])
+  
+  with col1:
+    st.header("User Input as DataFrame")
+    st.write("")
+    st.dataframe(preview_df.iloc[:, :6])
+    st.write("")
+    st.dataframe(preview_df.iloc[:, 6:])
+    st.write("")
+
+  with col2:
+    st.subheader("Prediction:")
+    st.subheader(result)
 
   st.write("")
+  predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
     prediction = model.predict(inputs)[0]
@@ -249,15 +254,6 @@ with tab1:
 
   st.write("")
   st.write("")
-  st.subheader("Prediction:")
-  # Move the prediction to the top right
-  col1, col2 = st.columns([1, 1])
-  
-  with col1:
-      pass  # Keep the first column empty
-  
-  with col2:
-      st.subheader(result)
 
 with tab2:
   st.header("Predict multiple data:")
