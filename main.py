@@ -86,29 +86,25 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model_path = "adhaidh"
-model_name = "aodoand"
-accuracy = "dandad"
+model_path = "models/xgb_model.pkl"
+model_name = model_path.split('/')[-1].split('_')[0]
 
-# model_path = "models/xgb_model.pkl"
-# model_name = model_path.split('/')[-1].split('_')[0]
+def what_model(model_name: str):
+  if model_name == "xgb":
+    return "XGBoost"
+  elif model_name == "knn":
+    return "K-Nearest Neighbor"
+  elif model_name == "rf":
+    return "Random Forest"
+  else:
+    return "Model Not Recognized"
 
-# def what_model(model_name: str):
-#   if model_name == "xgb":
-#     return "XGBoost"
-#   elif model_name == "knn":
-#     return "K-Nearest Neighbor"
-#   elif model_name == "rf":
-#     return "Random Forest"
-#   else:
-#     return "Model Not Recognized"
+model_name = what_model(model_name)
+model = pickle.load(open(model_path, 'rb'))
 
-# model_name = what_model(model_name)
-# model = pickle.load(open(model_path, 'rb'))
-
-# y_pred = model.predict(X.values)
-# accuracy = round((accuracy_score(y, y_pred) * 100), 2)
-# print(accuracy) # Untuk DEBUG
+y_pred = model.predict(X.values)
+accuracy = round((accuracy_score(y, y_pred) * 100), 2)
+print(accuracy) # Untuk DEBUG
 
 df_final = X
 df_final['target'] = y
@@ -127,36 +123,7 @@ desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{accuracy}**]% (
 model_desc.markdown(desc)
 st.write("")
 
-tab1, tab2, tab3 = st.tabs(["Single-predict", "Multi-predict", "Change Model"])
-
-with tab3:
-  st.write("Haishhh")
-  temp_model = st.selectbox(label=":violet[**Machine Learning Model**]", options=["XGBoost", "K-Nearest Neighbor", "Random Forest"])
-  st.sidebar.write("")
-
-  if temp_model == "XGBoost":
-    model_path = "models/xgb_model.pkl"
-  elif temp_model == "K-Nearest Neighbor":
-    model_path = "models/knn_model.pkl"
-  elif temp_model == "Random Forest":
-    model_path = "models/rf_model.pkl"
-  model_name = temp_model
-
-  change_btn = st.button("Change Model", type="primary")
-
-  if change_btn:
-    model = pickle.load(open(model_path, 'rb'))
-
-    X = df_clean.drop("target", axis=1)
-    y = df_clean['target']
-
-    smote = SMOTE(random_state=42)
-    X, y = smote.fit_resample(X, y)
-
-    new_y_pred = model.predict(X.values)
-    new_accuracy = round((accuracy_score(y, new_y_pred) * 100), 2)
-    new_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{new_accuracy}**]% (:red[_Do not copy outright_])"
-    model_desc.markdown(new_desc)
+tab1, tab2= st.tabs(["Single-predict", "Multi-predict"])
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
@@ -272,7 +239,6 @@ with tab1:
   predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
-    st.write("Modelnya adalah sebagai berikut tolong lihat aku dan jawab pertanyaanku", model)
     prediction = model.predict(inputs)[0]
 
     bar = st.progress(0)
