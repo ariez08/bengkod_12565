@@ -80,11 +80,15 @@ fill_values = {
 df_clean = df_selected.fillna(value=fill_values)
 df_clean.drop_duplicates(inplace=True)
 
-# X = df_clean.drop("target", axis=1)
-# y = df_clean['target']
+X = df_clean.drop("target", axis=1)
+y = df_clean['target']
 
-# smote = SMOTE(random_state=42)
-# X, y = smote.fit_resample(X, y)
+smote = SMOTE(random_state=42)
+X, y = smote.fit_resample(X, y)
+
+model_path = "adhaidh"
+model_name = "aodoand"
+accuracy = "dandad"
 
 # model_path = "models/xgb_model.pkl"
 # model_name = model_path.split('/')[-1].split('_')[0]
