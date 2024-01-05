@@ -139,7 +139,7 @@ with tab3:
   model_name = temp_model
 
   change_btn = st.button("Change Model", type="primary")
-  
+
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
     y_pred = model.predict(X)
@@ -261,7 +261,7 @@ with tab1:
   predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
-    print(model)
+    print("Modelnya adalah sebagai berikut tolong lihat aku dan jawab pertanyaanku", model)
     prediction = model.predict(inputs)[0]
 
     bar = st.progress(0)
