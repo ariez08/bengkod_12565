@@ -261,7 +261,7 @@ with tab1:
   predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
-    print("Modelnya adalah sebagai berikut tolong lihat aku dan jawab pertanyaanku", model)
+    st.write("Modelnya adalah sebagai berikut tolong lihat aku dan jawab pertanyaanku", model)
     prediction = model.predict(inputs)[0]
 
     bar = st.progress(0)
