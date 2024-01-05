@@ -80,32 +80,31 @@ fill_values = {
 df_clean = df_selected.fillna(value=fill_values)
 df_clean.drop_duplicates(inplace=True)
 
-X = df_clean.drop("target", axis=1)
-y = df_clean['target']
+# X = df_clean.drop("target", axis=1)
+# y = df_clean['target']
 
-smote = SMOTE(random_state=42)
-X, y = smote.fit_resample(X, y)
+# smote = SMOTE(random_state=42)
+# X, y = smote.fit_resample(X, y)
 
-model_path = "models/xgb_model.pkl"
-model_name = model_path.split('/')[-1].split('_')[0]
-st.write(time.time())
+# model_path = "models/xgb_model.pkl"
+# model_name = model_path.split('/')[-1].split('_')[0]
 
-def what_model(model_name: str):
-  if model_name == "xgb":
-    return "XGBoost"
-  elif model_name == "knn":
-    return "K-Nearest Neighbor"
-  elif model_name == "rf":
-    return "Random Forest"
-  else:
-    return "Model Not Recognized"
+# def what_model(model_name: str):
+#   if model_name == "xgb":
+#     return "XGBoost"
+#   elif model_name == "knn":
+#     return "K-Nearest Neighbor"
+#   elif model_name == "rf":
+#     return "Random Forest"
+#   else:
+#     return "Model Not Recognized"
 
-model_name = what_model(model_name)
-model = pickle.load(open(model_path, 'rb'))
+# model_name = what_model(model_name)
+# model = pickle.load(open(model_path, 'rb'))
 
-y_pred = model.predict(X.values)
-accuracy = round((accuracy_score(y, y_pred) * 100), 2)
-print(accuracy) # Untuk DEBUG
+# y_pred = model.predict(X.values)
+# accuracy = round((accuracy_score(y, y_pred) * 100), 2)
+# print(accuracy) # Untuk DEBUG
 
 df_final = X
 df_final['target'] = y
