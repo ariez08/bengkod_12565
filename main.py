@@ -209,7 +209,7 @@ with tab1:
   preview_df = pd.DataFrame(data, index=['input'])
   result = ":violet[-]"
 
-  col1, col2 = st.columns([1, 1])
+  col1, col2, col3 = st.columns([1, 1])
   
   with col1:
     st.header("User Input as DataFrame")
@@ -262,7 +262,7 @@ with tab1:
       unsafe_allow_html=True,
   )
 
-  with col2:
+  with col3:
     st.subheader("Prediction:")
     st.subheader(result)
 
