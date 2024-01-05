@@ -251,6 +251,7 @@ with tab1:
       result = ":red[**Heart disease level 3**]"
     elif prediction == 4:
       result = ":red[**Heart disease level 4**]"
+    st.subheader(result)
 
   st.write("")
   st.write("")
