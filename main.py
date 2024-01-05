@@ -103,8 +103,7 @@ model_name = what_model(model_name)
 model = pickle.load(open(model_path, 'rb'))
 
 y_pred = model.predict(X)
-accuracy = accuracy_score(y, y_pred)
-accuracy = round((accuracy * 100), 2)
+accuracy = round((accuracy_score(y, y_pred) * 100), 2)
 # print(accuracy) # Untuk DEBUG
 
 df_final = X
@@ -137,11 +136,15 @@ with tab3:
     model_path = "models/knn_model.pkl"
   elif temp_model == "Random Forest":
     model_path = "models/rf_model.pkl"
-  
+  model_name = temp_model
+
   change_btn = st.button("Change Model", type="primary")
+  
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
-    new_desc = f"**_:violet[{temp_model}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])"
+    y_pred = model.predict(X)
+    new_accuracy = round((accuracy_score(y, y_pred) * 100), 2)
+    new_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{new_accuracy}**]% (:red[_Do not copy outright_])"
     model_desc.markdown(new_desc)
 
 with tab1:
@@ -258,6 +261,7 @@ with tab1:
   predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
+    print(model)
     prediction = model.predict(inputs)[0]
 
     bar = st.progress(0)
