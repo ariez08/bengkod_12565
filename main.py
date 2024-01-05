@@ -248,6 +248,20 @@ with tab1:
     elif prediction == 4:
       result = ":red[**Heart disease level 4**]"
 
+  # Insert a vertical line using HTML and CSS
+  st.markdown(
+      """
+      <style>
+          .vertical-line {
+              border-left: 2px solid #ccc;
+              height: 100%;
+              margin: 0 10px;
+          }
+      </style>
+      """,
+      unsafe_allow_html=True,
+  )
+
   with col2:
     st.subheader("Prediction:")
     st.subheader(result)
