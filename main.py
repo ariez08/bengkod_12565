@@ -142,9 +142,15 @@ with tab3:
 
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
-    st.write(X)
-    y_pred = model.predict(X.values)
-    new_accuracy = round((accuracy_score(y, y_pred) * 100), 2)
+
+    X = df_clean.drop("target", axis=1)
+    y = df_clean['target']
+
+    smote = SMOTE(random_state=42)
+    X, y = smote.fit_resample(X, y)
+
+    new_y_pred = model.predict(X.values)
+    new_accuracy = round((accuracy_score(y, new_y_pred) * 100), 2)
     new_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{new_accuracy}**]% (:red[_Do not copy outright_])"
     model_desc.markdown(new_desc)
 
