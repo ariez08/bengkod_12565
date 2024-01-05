@@ -228,11 +228,11 @@ with tab1:
   with col1:
     st.header("User Input as DataFrame")
     st.write("")
-    st.dataframe(preview_df.iloc[:, :3])
+    st.dataframe(preview_df.iloc[:, :4])
     st.write("")
-    st.dataframe(preview_df.iloc[:, 3:6])
+    st.dataframe(preview_df.iloc[:, 4:7])
     st.write("")
-    st.dataframe(preview_df.iloc[:, 6:])
+    st.dataframe(preview_df.iloc[:, 7:])
     st.write("")
 
   st.write("")
