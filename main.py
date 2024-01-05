@@ -141,7 +141,8 @@ with tab3:
   change_btn = st.button("Change Model", type="primary")
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
-    # model_desc.(f"**_:violet[{temp_model}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+    new_desc = f"**_:violet[{temp_model}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])"
+    model_desc.markdown(new_desc)
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
