@@ -113,7 +113,7 @@ tab1, tab2 = st.tabs(["Single-predict", "Multi-predict"])
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
-
+  st.sidebar.markdown("This is some text beside the button.")
   age = st.sidebar.number_input(label=":violet[**Age**]", min_value=df_final['age'].min(), max_value=df_final['age'].max())
   st.sidebar.write(f":orange[Min] value: :orange[**{df_final['age'].min()}**], :red[Max] value: :red[**{df_final['age'].max()}**]")
   st.sidebar.write("")
