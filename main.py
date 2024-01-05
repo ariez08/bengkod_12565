@@ -219,10 +219,6 @@ with tab1:
     st.dataframe(preview_df.iloc[:, 6:])
     st.write("")
 
-  with col2:
-    st.subheader("Prediction:")
-    st.subheader(result)
-
   st.write("")
   predict_btn = st.button("**Predict**", type="primary")
   if predict_btn:
@@ -251,6 +247,9 @@ with tab1:
       result = ":red[**Heart disease level 3**]"
     elif prediction == 4:
       result = ":red[**Heart disease level 4**]"
+
+  with col2:
+    st.subheader("Prediction:")
     st.subheader(result)
 
   st.write("")
