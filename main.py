@@ -102,9 +102,9 @@ def what_model(model_name: str):
 model_name = what_model(model_name)
 model = pickle.load(open(model_path, 'rb'))
 
-y_pred = model.predict(X)
+y_pred = model.predict(X.values)
 accuracy = round((accuracy_score(y, y_pred) * 100), 2)
-# print(accuracy) # Untuk DEBUG
+print(accuracy) # Untuk DEBUG
 
 df_final = X
 df_final['target'] = y
@@ -142,7 +142,7 @@ with tab3:
 
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
-    y_pred = model.predict(X)
+    y_pred = model.predict(X.values)
     new_accuracy = round((accuracy_score(y, y_pred) * 100), 2)
     new_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{new_accuracy}**]% (:red[_Do not copy outright_])"
     model_desc.markdown(new_desc)
