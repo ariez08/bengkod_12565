@@ -119,8 +119,7 @@ st.set_page_config(
 )
 
 st.title("Hungarian Heart Disease")
-model_name_st = st.write(model_name)
-model_acc_st = st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+model_desc = st.write(f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
 st.write("")
 
 tab1, tab2, tab3 = st.tabs(["Single-predict", "Multi-predict", "Change Model"])
