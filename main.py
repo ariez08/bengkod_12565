@@ -152,12 +152,12 @@ with tab1:
   st.sidebar.write(f":orange[Min] value: :orange[**{df_final['chol'].min()}**], :red[Max] value: :red[**{df_final['chol'].max()}**]")
   st.sidebar.write("")
 
-  fbs_sb = st.sidebar.selectbox(label=":violet[**Fasting blood sugar > 120 mg/dl?**]", options=["False", "True"])
+  fbs_sb = st.sidebar.selectbox(label=":violet[**Fasting blood sugar > 120 mg/dl?**]", options=["Yes", "No"])
   st.sidebar.write("")
   st.sidebar.write("")
-  if fbs_sb == "False":
+  if fbs_sb == "No":
     fbs = 0
-  elif fbs_sb == "True":
+  elif fbs_sb == "Yes":
     fbs = 1
   # -- Value 0: false
   # -- Value 1: true
@@ -250,7 +250,14 @@ with tab1:
   st.write("")
   st.write("")
   st.subheader("Prediction:")
-  st.subheader(result)
+  # Move the prediction to the top right
+  col1, col2 = st.columns([1, 1])
+  
+  with col1:
+      pass  # Keep the first column empty
+  
+  with col2:
+      st.subheader(result)
 
 with tab2:
   st.header("Predict multiple data:")
