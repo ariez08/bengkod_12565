@@ -86,8 +86,8 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open("models/xgb_model.pkl", 'rb'))
-# model = joblib.load('models/xgb_model.pkl')
+model_path = "models/xgb_model.pkl"
+model = pickle.load(open(model_path, 'rb'))
 
 y_pred = model.predict(X)
 accuracy = accuracy_score(y, y_pred)
@@ -102,14 +102,17 @@ df_final['target'] = y
 # STREAMLIT
 st.set_page_config(
   page_title = "Hungarian Heart Disease",
-  page_icon = ":heart:"
+  page_icon = ":sunglasses:"
 )
 
 st.title("Hungarian Heart Disease")
 st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
 st.write("")
 
-tab1, tab2 = st.tabs(["Single-predict", "Multi-predict"])
+tab1, tab2, tab3 = st.tabs(["Single-predict", "Multi-predict", "Change Model"])
+
+with tab3:
+  st.write("Haishhh")
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
@@ -209,7 +212,7 @@ with tab1:
   preview_df = pd.DataFrame(data, index=['input'])
   result = ":violet[-]"
 
-  col1, col2, col3 = st.columns([2, 1, 1])
+  col1, col2, col3 = st.columns([3, 1, 1])
   
   with col1:
     st.header("User Input as DataFrame")
@@ -249,20 +252,6 @@ with tab1:
       result = ":red[**Heart disease level 3**]"
     elif prediction == 4:
       result = ":red[**Heart disease level 4**]"
-
-  # Insert a vertical line using HTML and CSS
-  st.markdown(
-      """
-      <style>
-          .vertical-line {
-              border-left: 2px solid #ccc;
-              height: 100%;
-              margin: 0 10px;
-          }
-      </style>
-      """,
-      unsafe_allow_html=True,
-  )
 
   with col3:
     st.subheader("Prediction:")
