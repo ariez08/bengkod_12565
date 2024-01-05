@@ -88,6 +88,7 @@ X, y = smote.fit_resample(X, y)
 
 model_path = "models/xgb_model.pkl"
 model_name = model_path.split('/')[-1].split('_')[0]
+st.write(time.time())
 
 def what_model(model_name: str):
   if model_name == "xgb":
