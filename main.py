@@ -119,8 +119,8 @@ st.set_page_config(
 )
 
 st.title("Hungarian Heart Disease")
-# model_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])"
-model_desc = st.write(f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+model_desc = f"**_:violet[{model_name}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])"
+model_desc = st.write(model_desc)
 a = st.write("")
 
 tab1, tab2, tab3 = st.tabs(["Single-predict", "Multi-predict", "Change Model"])
@@ -140,7 +140,7 @@ with tab3:
   change_btn = st.button("Change Model", type="primary")
   if change_btn:
     model = pickle.load(open(model_path, 'rb'))
-    a.text(f"**_:violet[{temp_model}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+    model_desc.text(f"**_:violet[{temp_model}] Model Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
