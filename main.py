@@ -87,6 +87,19 @@ smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
 model_path = "models/xgb_model.pkl"
+model_name = model_path.split('/')[-1].split('_')[0]
+
+def what_model(model_name: str):
+  if model_name == "xgb":
+    return "XGBoost"
+  elif model_name == "knn":
+    return "K-Nearest Neighbor"
+  elif model_name == "rf":
+    return "Random Forest"
+  else:
+    return "Model Not Recognized"
+
+model_name = what_model(model_name)
 model = pickle.load(open(model_path, 'rb'))
 
 y_pred = model.predict(X)
@@ -106,17 +119,19 @@ st.set_page_config(
 )
 
 st.title("Hungarian Heart Disease")
-st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+model_name_st = st.write(model_name)
+model_acc_st = st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
 st.write("")
 
 tab1, tab2, tab3 = st.tabs(["Single-predict", "Multi-predict", "Change Model"])
 
 with tab3:
   st.write("Haishhh")
+  st.button("Change Model", type="primary")
 
 with tab1:
   st.sidebar.header("**User Input** Sidebar")
-  st.sidebar.markdown("This is some text beside the button.")
+
   age = st.sidebar.number_input(label=":violet[**Age**]", min_value=df_final['age'].min(), max_value=df_final['age'].max())
   st.sidebar.write(f":orange[Min] value: :orange[**{df_final['age'].min()}**], :red[Max] value: :red[**{df_final['age'].max()}**]")
   st.sidebar.write("")
